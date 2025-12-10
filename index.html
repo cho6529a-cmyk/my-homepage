@@ -684,7 +684,7 @@
             <li><a href="gallery.html">📷 포토갤러리</a></li>
             <li><a href="#contact">문의·오시는 길</a></li>
         </ul>
-        <button onclick="location.href='admin.html'" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background-color: #245a24; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; color: white;">🔐 관리자</button>
+        <button onclick="location.href='admin.html'" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background-color: transparent; border: none; color: white; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 16px;">🔐 관리자</button>
     </nav>
 
     <!-- 배너 슬라이더 -->
@@ -1150,13 +1150,13 @@
             <div class="subsection">
                 <h3>사무국 위치</h3>
                 <ul>
-                    <li><strong>주소:</strong> 경기도 광주시 초월읍 대쌍령길 44 202호</li>
+                    <li><strong>주소:</strong> <span id="displayAddress">경기도 광주시 초월읍 대쌍령길 44 202호</span></li>
                     <li><strong>대중교통:</strong></li>
                     <ul style="margin-top: 8px;">
                         <li>버스: 광주 시내버스 이용</li>
                         <li>자가용: 주차 가능</li>
                     </ul>
-                    <li style="margin-top: 15px;"><strong><a href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EA%B4%91%EC%A3%BC%EC%8B%9C%20%EC%B4%88%EC%9B%94%EC%9D%8D%20%EB%8C%80%EC%8C%8D%EB%A0%B9%EA%B8%B8%2044" target="_blank">지도 보기 (네이버지도)</a></strong></li>
+                    <li style="margin-top: 15px;"><strong><a id="naverMapLink" href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EA%B4%91%EC%A3%BC%EC%8B%9C%20%EC%B4%88%EC%9B%94%EC%9D%8D%20%EB%8C%80%EC%8C%8D%EB%A0%B9%EA%B8%B8%2044" target="_blank">지도 보기 (네이버지도)</a></strong></li>
                 </ul>
             </div>
         </section>
@@ -1186,7 +1186,7 @@
                     <p>대표 : 대표이사<br>
                     인가번호 : 2019-1340-SO-7232<br>
                     (교육부 사회적동조합 설립인가)</p>
-                    <p>주소 : 경기도 광주시 초월읍 대쌍령길 44 202호</p>
+                    <p>주소 : <span id="footerAddress">경기도 광주시 초월읍 대쌍령길 44 202호</span></p>
                     <p>사업자등록번호 / 고유번호 : 추후 기재</p>
                     <p>전화 : 031-762-9789 | 이메일 : <a href="mailto:anchow@naver.com">anchow@naver.com</a></p>
                 </div>
