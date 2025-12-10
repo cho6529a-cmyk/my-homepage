@@ -496,19 +496,22 @@
         }
         
         .footer-top {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: 1fr repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
             margin-bottom: 40px;
             padding-bottom: 30px;
             border-bottom: 1px solid rgba(255,255,255,0.2);
         }
         
+        .footer-logo-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
         .footer-main {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-top: 20px;
+            display: contents;
         }
         
         .footer-logo {
@@ -1127,32 +1130,33 @@
     <footer>
         <div class="footer-content">
             <div class="footer-top">
-                <div class="footer-logo">
-                    <strong>행복공감사회적협동조합</strong>
-                </div>
+                <div class="footer-logo-info">
+                    <div class="footer-logo">
+                        <strong>행복공감사회적협동조합</strong>
+                    </div>
 
-                <div class="footer-info">
-                    <p>
-                        조합명 : 행복공감사회적협동조합<br>
-                        대표 : 대표이사<br>
-                        인가번호 : 2019-1340-SO-7232<br>
-                        (교육부 사회적동조합 설립인가)
-                    </p>
-                    <p>
-                        주소 : 경기도 광주시 초월읍 대쌍령길 44 202호
-                    </p>
-                    <p>
-                        사업자등록번호 / 고유번호 : 추후 기재
-                    </p>
-                    <p>
-                        전화 : 031-762-9789&nbsp;&nbsp;|&nbsp;&nbsp;
-                        이메일 : <a href="mailto:anchow@naver.com">anchow@naver.com</a>
-                    </p>
+                    <div class="footer-info">
+                        <p>
+                            조합명 : 행복공감사회적협동조합<br>
+                            대표 : 대표이사<br>
+                            인가번호 : 2019-1340-SO-7232<br>
+                            (교육부 사회적동조합 설립인가)
+                        </p>
+                        <p>
+                            주소 : 경기도 광주시 초월읍 대쌍령길 44 202호
+                        </p>
+                        <p>
+                            사업자등록번호 / 고유번호 : 추후 기재
+                        </p>
+                        <p>
+                            전화 : 031-762-9789&nbsp;&nbsp;|&nbsp;&nbsp;
+                            이메일 : <a href="mailto:anchow@naver.com">anchow@naver.com</a>
+                        </p>
+                    </div>
                 </div>
                 
-                <div class="footer-main">
-                    <div class="footer-links">
-                        <h4>정책 안내</h4>
+                <div class="footer-links">
+                    <h4>정책 안내</h4>
                     <ul>
                         <li><a href="#">개인정보처리방침</a></li>
                         <li><a href="#">이용약관</a></li>
@@ -1184,7 +1188,6 @@
                             </a>
                         </li>
                     </ul>
-                </div>
                 </div>
             </div>
 
