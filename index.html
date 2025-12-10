@@ -46,6 +46,7 @@
         /* 네비게이션 */
         nav {
             background-color: #245a24;
+            position: relative;
         }
         
         nav ul {
@@ -661,6 +662,11 @@
             }
         }
     </style>
+    <!-- Kakao SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        Kakao.init('YOUR_KAKAO_APP_KEY'); // Kakao App Key 입력
+    </script>
 </head>
 <body>
     <!-- 헤더 -->
@@ -684,6 +690,7 @@
             <li><a href="gallery.html">📷 포토갤러리</a></li>
             <li><a href="#contact">문의·오시는 길</a></li>
         </ul>
+        <button onclick="shareToKakao()" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background-color: #FFE812; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; color: #000;">📱 카카오톡 공유</button>
     </nav>
 
     <!-- 배너 슬라이더 -->
@@ -1141,8 +1148,7 @@
                 <h3>연락처</h3>
                 <ul>
                     <li><strong>이메일:</strong> <a href="mailto:anchow@naver.com">anchow@naver.com</a></li>
-                    <li><strong>전화:</strong> 031-762-9789</li>
-                    <li><strong>팩스:</strong> 031-769-6664</li>
+                    <li><strong>카카오톡:</strong> <a href="https://pf.kakao.com/_xfxnhsxb" target="_blank">행복공감사회적협동조합 (카카오톡 채널)</a></li>
                 </ul>
             </div>
             
@@ -1164,43 +1170,70 @@
     <!-- 푸터 -->
     <footer>
         <div class="footer-content">
-            <div style="text-align: center; padding: 40px 20px;">
-                <h3 style="color: white; margin-bottom: 20px;">행복공감사회적협동조합</h3>
+            <div class="footer-top">
+                <div class="footer-logo-info">
+                    <div class="footer-logo">
+                        <strong>행복공감사회적협동조합</strong>
+                    </div>
+
+                    <div class="footer-info">
+                        <p>
+                            조합명 : 행복공감사회적협동조합<br>
+                            대표 : 대표이사<br>
+                            인가번호 : 2019-1340-SO-7232<br>
+                            (교육부 사회적동조합 설립인가)
+                        </p>
+                    </div>
+                </div>
                 
-                <div style="color: rgba(255,255,255,0.95); line-height: 1.8; margin-bottom: 25px;">
-                    <p style="margin: 5px 0;">조합명 : 행복공감사회적협동조합</p>
-                    <p style="margin: 5px 0;">대표 : 대표이사</p>
-                    <p style="margin: 5px 0;">인가번호 : 2019-1340-SO-7232 (교육부 사회적동조합 설립인가)</p>
+                <div class="footer-section">
+                    <h4>조합명 : 행복공감사회적협동조합</h4>
+                    <p>대표 : 대표이사<br>
+                    인가번호 : 2019-1340-SO-7232<br>
+                    (교육부 사회적동조합 설립인가)</p>
+                    <p>주소 : 경기도 광주시 초월읍 대쌍령길 44 202호</p>
+                    <p>사업자등록번호 / 고유번호 : 추후 기재</p>
+                    <p>전화 : 031-762-9789 | 이메일 : <a href="mailto:anchow@naver.com">anchow@naver.com</a></p>
                 </div>
 
-                <div style="color: rgba(255,255,255,0.95); line-height: 1.8;">
-                    <p style="margin: 5px 0;">주소 : 경기도 광주시 초월읍 대쌍령길 44 202호</p>
-                    <p style="margin: 5px 0;">사업자등록번호 / 고유번호 : 추후 기재</p>
-                    <p style="margin: 5px 0;">전화 : 031-762-9789 | 이메일 : <a href="mailto:anchow@naver.com" style="color: #90ee90; text-decoration: none;">anchow@naver.com</a></p>
+                <div class="footer-section">
+                    <h4>정책 안내</h4>
+                    <ul>
+                        <li><a href="#">개인정보처리방침</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">이메일무단수집거부</a></li>
+                    </ul>
                 </div>
 
-                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
-                    <div>
-                        <p style="color: white; font-size: 14px; margin-bottom: 10px;"><strong>정책 안내</strong></p>
-                        <ul style="list-style: none; padding: 0; color: rgba(255,255,255,0.9); font-size: 13px;">
-                            <li><a href="#" style="color: #90ee90; text-decoration: none;">개인정보처리방침</a></li>
-                            <li style="margin-top: 5px;"><a href="#" style="color: #90ee90; text-decoration: none;">이용약관</a></li>
-                            <li style="margin-top: 5px;"><a href="#" style="color: #90ee90; text-decoration: none;">이메일무단수집거부</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <p style="color: white; font-size: 14px; margin-bottom: 10px;"><strong>투명경영 · 공익정보</strong></p>
-                        <ul style="list-style: none; padding: 0; color: rgba(255,255,255,0.9); font-size: 13px;">
-                            <li><a href="https://www.hometax.go.kr" target="_blank" rel="noopener" style="color: #90ee90; text-decoration: none;">국세청 홈택스 공익법인</a></li>
-                            <li style="margin-top: 5px;"><a href="https://www.hometax.go.kr" target="_blank" rel="noopener" style="color: #90ee90; text-decoration: none;">기부금 모금액 및 활용실적</a></li>
-                            <li style="margin-top: 5px;"><a href="https://www.hometax.go.kr" target="_blank" rel="noopener" style="color: #90ee90; text-decoration: none;">전자기부금영수증 제도</a></li>
-                            <li style="margin-top: 5px;"><a href="https://www.clean.go.kr" target="_blank" rel="noopener" style="color: #90ee90; text-decoration: none;">국민권익위원회</a></li>
-                        </ul>
-                    </div>
+                <div class="footer-section">
+                    <h4>투명경영 · 공익정보</h4>
+                    <ul>
+                        <li>
+                            <a href="https://www.hometax.go.kr" target="_blank" rel="noopener">
+                                국세청 홈택스 공익법인<br>결산서류 등 공시
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.hometax.go.kr" target="_blank" rel="noopener">
+                                기부금 모금액 및<br>활용실적 공시
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.hometax.go.kr" target="_blank" rel="noopener">
+                                전자기부금영수증<br>제도 안내
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.clean.go.kr" target="_blank" rel="noopener">
+                                국민권익위원회<br>공익신고센터
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+            </div>
 
-                <p style="color: rgba(255,255,255,0.7); font-size: 12px; margin-top: 25px;">© 2019–2025 Happy Empathy Social Cooperative. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>© 2019–2025 Happy Empathy Social Cooperative. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1247,6 +1280,36 @@
             showBanner(0);
             startBannerSlide();
         });
+
+        // 카카오톡 공유 함수
+        function shareToKakao() {
+            Kakao.Share.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '행복공감사회적협동조합',
+                    description: '환경·진로·도시농업 교육으로 더 나은 사회를 만듭니다',
+                    imageUrl: 'https://cho6529a-cmyk.github.io/my-homepage/img/logo.png',
+                    link: {
+                        mobileWebUrl: 'https://cho6529a-cmyk.github.io/my-homepage/',
+                        webUrl: 'https://cho6529a-cmyk.github.io/my-homepage/',
+                    },
+                },
+                social: {
+                    likeCount: 0,
+                    commentCount: 0,
+                    sharedCount: 0,
+                },
+                buttons: [
+                    {
+                        title: '홈페이지 방문',
+                        link: {
+                            mobileWebUrl: 'https://cho6529a-cmyk.github.io/my-homepage/',
+                            webUrl: 'https://cho6529a-cmyk.github.io/my-homepage/',
+                        },
+                    },
+                ],
+            });
+        }
     </script>
 </body>
 </html>
