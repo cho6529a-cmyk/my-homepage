@@ -73,21 +73,84 @@
             background-color: #1a4620;
         }
         
-        /* 배너 */
+        /* 배너 슬라이더 */
+        .banner-slider {
+            position: relative;
+            background: linear-gradient(135deg, #2c5f2d 0%, #1a4620 100%);
+            color: white;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
         .banner {
             background: linear-gradient(135deg, #2c5f2d 0%, #1a4620 100%);
             color: white;
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
-            margin-bottom: 50px;
             border-radius: 0;
+            animation: fadeIn 1s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         .banner h1 {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             line-height: 1.6;
-            margin: 0;
+            margin-bottom: 15px;
+        }
+        
+        .banner p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+        
+        .banner-btn {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 30px;
+            border: 2px solid white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .banner-btn:hover {
+            background-color: white;
+            color: #2c5f2d;
+        }
+        
+        /* 배너 점 네비게이션 */
+        .banner-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .dot.active {
+            background-color: white;
+        }
+        
+        .dot:hover {
+            background-color: rgba(255, 255, 255, 0.8);
         }
         
         /* 메인 콘텐츠 */
@@ -571,13 +634,39 @@
             <li><a href="#resources">자료실</a></li>
             <li><a href="#membership">조합원·후원</a></li>
             <li><a href="transparency.html">📊 투명경영</a></li>
+            <li><a href="gallery.html">📷 포토갤러리</a></li>
             <li><a href="#contact">문의·오시는 길</a></li>
         </ul>
     </nav>
 
-    <!-- 배너 섹션 -->
-    <div class="banner">
-        <h1>함께 배우고, 함께 가꾸고, 함께 나누는<br>우리 동네 사회적협동조합</h1>
+    <!-- 배너 슬라이더 -->
+    <div class="banner-slider">
+        <div class="banner banner-1">
+            <h1>경안천을 지키는 AI 생태교육 허브</h1>
+            <p>물환경·수생태·도시농업, 그리고 AI 데이터까지.<br>
+            경기광주의 환경교육을 한 곳에서 만나는 미래형 플랫폼입니다.</p>
+            <a href="ai-data-lab.html" class="banner-btn">프로그램 살펴보기</a>
+        </div>
+        
+        <div class="banner banner-2" style="display: none;">
+            <h1>경기광주 물환경·기후교육의 중심</h1>
+            <p>아이들과 시민이 함께 배우고 실천하는<br>
+            수질·기후·도시농업 통합 교육센터를 지향합니다.</p>
+            <a href="index.html#programs" class="banner-btn">교육·체험 신청하기</a>
+        </div>
+        
+        <div class="banner banner-3" style="display: none;">
+            <h1>시민과학과 AI가 만나는 미래환경 플랫폼</h1>
+            <p>경안천의 작은 물고기, 한 컵의 물, 한 장의 데이터가<br>
+            아이들에게는 '미래 과학 교과서'가 됩니다.</p>
+            <a href="ai-data-lab.html" class="banner-btn">AI 생태데이터랩 바로가기</a>
+        </div>
+        
+        <div class="banner-dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
     </div>
 
     <!-- 메인 콘텐츠 -->
@@ -1093,5 +1182,49 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        let currentBannerIndex = 0;
+        
+        function showBanner(index) {
+            const banners = document.querySelectorAll('.banner');
+            const dots = document.querySelectorAll('.dot');
+            
+            if (index >= banners.length) {
+                currentBannerIndex = 0;
+            } else if (index < 0) {
+                currentBannerIndex = banners.length - 1;
+            } else {
+                currentBannerIndex = index;
+            }
+            
+            banners.forEach((banner, i) => {
+                banner.style.display = i === currentBannerIndex ? 'block' : 'none';
+            });
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentBannerIndex);
+            });
+        }
+        
+        function currentSlide(index) {
+            showBanner(index);
+            clearInterval(bannerInterval);
+            startBannerSlide();
+        }
+        
+        let bannerInterval;
+        function startBannerSlide() {
+            bannerInterval = setInterval(() => {
+                showBanner(currentBannerIndex + 1);
+            }, 5000);
+        }
+        
+        // 페이지 로드 시 자동 슬라이드 시작
+        window.addEventListener('load', () => {
+            showBanner(0);
+            startBannerSlide();
+        });
+    </script>
 </body>
 </html>
