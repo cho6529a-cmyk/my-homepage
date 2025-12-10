@@ -662,11 +662,6 @@
             }
         }
     </style>
-    <!-- Kakao SDK -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script>
-        Kakao.init('YOUR_KAKAO_APP_KEY'); // Kakao App Key 입력
-    </script>
 </head>
 <body>
     <!-- 헤더 -->
@@ -680,17 +675,17 @@
     <!-- 네비게이션 -->
     <nav>
         <ul>
-            <li><a href="#about">① 조합소개</a></li>
-            <li><a href="#business">② 주요사업</a></li>
-            <li><a href="#programs">③ 교육·프로그램</a></li>
+            <li><a href="#about">조합소개</a></li>
+            <li><a href="#business">주요사업</a></li>
+            <li><a href="#programs">교육·프로그램</a></li>
             <li><a href="goods.html">🛍️ 굿즈·출판</a></li>
-            <li><a href="#resources">⑤ 자료실</a></li>
-            <li><a href="#membership">⑥ 조합원·후원</a></li>
+            <li><a href="#resources">자료실</a></li>
+            <li><a href="#membership">조합원·후원</a></li>
             <li><a href="transparency.html">📊 투명경영</a></li>
             <li><a href="gallery.html">📷 포토갤러리</a></li>
-            <li><a href="#contact">⑦ 문의·오시는 길</a></li>
+            <li><a href="#contact">문의·오시는 길</a></li>
         </ul>
-        <button onclick="shareToKakao()" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background-color: #FFE812; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; color: #000;">📱 카카오톡 공유</button>
+        <button onclick="location.href='#admin'" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background-color: #FFE812; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; color: #000;">🔐 관리자</button>
     </nav>
 
     <!-- 배너 슬라이더 -->
@@ -1148,7 +1143,8 @@
                 <h3>연락처</h3>
                 <ul>
                     <li><strong>이메일:</strong> <a href="mailto:anchow@naver.com">anchow@naver.com</a></li>
-                    <li><strong>카카오톡:</strong> <a href="https://pf.kakao.com/_xfxnhsxb" target="_blank">행복공감사회적협동조합 (카카오톡 채널)</a></li>
+                    <li><strong>전화:</strong> 031-762-9789</li>
+                    <li><strong>팩스:</strong> 031-769-6664</li>
                 </ul>
             </div>
             
@@ -1280,36 +1276,6 @@
             showBanner(0);
             startBannerSlide();
         });
-
-        // 카카오톡 공유 함수
-        function shareToKakao() {
-            Kakao.Share.sendDefault({
-                objectType: 'feed',
-                content: {
-                    title: '행복공감사회적협동조합',
-                    description: '환경·진로·도시농업 교육으로 더 나은 사회를 만듭니다',
-                    imageUrl: 'https://cho6529a-cmyk.github.io/my-homepage/img/logo.png',
-                    link: {
-                        mobileWebUrl: 'https://cho6529a-cmyk.github.io/my-homepage/',
-                        webUrl: 'https://cho6529a-cmyk.github.io/my-homepage/',
-                    },
-                },
-                social: {
-                    likeCount: 0,
-                    commentCount: 0,
-                    sharedCount: 0,
-                },
-                buttons: [
-                    {
-                        title: '홈페이지 방문',
-                        link: {
-                            mobileWebUrl: 'https://cho6529a-cmyk.github.io/my-homepage/',
-                            webUrl: 'https://cho6529a-cmyk.github.io/my-homepage/',
-                        },
-                    },
-                ],
-            });
-        }
     </script>
 </body>
 </html>
