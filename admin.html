@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지 - 행복공감사회적협동조합</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background-color: #f5f7f3;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* 헤더 스타일 */
+        header {
+            background-color: #2c5f2d;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .site-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .site-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* 네비게이션 */
+        nav {
+            background-color: #245a24;
+            position: relative;
+        }
+        
+        nav ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+        
+        nav ul li {
+            position: relative;
+        }
+        
+        nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: #1a4620;
+        }
+        
+        /* 메인 콘텐츠 */
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .admin-container {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .admin-container h1 {
+            color: #2c5f2d;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #2c5f2d;
+            padding-bottom: 15px;
+        }
+        
+        .admin-section {
+            margin-bottom: 40px;
+        }
+        
+        .admin-section h2 {
+            color: #245a24;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c5f2d;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2c5f2d;
+            box-shadow: 0 0 5px rgba(44, 95, 45, 0.3);
+        }
+        
+        .btn {
+            background-color: #2c5f2d;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #1a4620;
+        }
+        
+        .btn-secondary {
+            background-color: #666;
+            margin-left: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #444;
+        }
+        
+        /* 로그인 섹션 */
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .login-container h1 {
+            color: #2c5f2d;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .data-list {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        .data-list th {
+            background-color: #2c5f2d;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        .data-list td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        
+        .data-list tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .data-list tr:hover {
+            background-color: #f0f8f1;
+        }
+        
+        /* 푸터 */
+        footer {
+            background-color: #2c5f2d;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 50px;
+            text-align: center;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+        
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .site-title {
+                font-size: 24px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li a {
+                padding: 12px 15px;
+            }
+            
+            .admin-container {
+                padding: 20px;
+            }
+            
+            .login-container {
+                margin: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="header-content">
+            <div class="site-title">행복공감사회적협동조합</div>
+            <div class="site-subtitle">환경·진로·도시농업 교육으로 더 나은 사회를 만듭니다</div>
+        </div>
+    </header>
+
+    <!-- 네비게이션 -->
+    <nav>
+        <ul>
+            <li><a href="index.html">← 돌아가기</a></li>
+        </ul>
+    </nav>
+
+    <!-- 로그인 폼 -->
+    <div id="loginSection" class="login-container">
+        <h1>🔐 관리자 로그인</h1>
+        <div id="loginMessage"></div>
+        <div class="form-group">
+            <label for="password">비밀번호:</label>
+            <input type="password" id="password" placeholder="관리자 비밀번호를 입력하세요">
+        </div>
+        <button class="btn" onclick="login()">로그인</button>
+    </div>
+
+    <!-- 관리자 페이지 -->
+    <main id="adminSection" class="hidden">
+        <div class="admin-container">
+            <h1>관리자 페이지</h1>
+            
+            <div class="admin-section">
+                <h2>📰 공지사항 관리</h2>
+                <div class="form-group">
+                    <label for="noticeTitle">제목:</label>
+                    <input type="text" id="noticeTitle" placeholder="공지사항 제목">
+                </div>
+                <div class="form-group">
+                    <label for="noticeContent">내용:</label>
+                    <textarea id="noticeContent" placeholder="공지사항 내용"></textarea>
+                </div>
+                <button class="btn" onclick="addNotice()">공지사항 추가</button>
+            </div>
+
+            <div class="admin-section">
+                <h2>📋 등록된 공지사항</h2>
+                <table class="data-list" id="noticeList">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성일</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody id="noticeBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="admin-section">
+                <h2>📧 문의 관리</h2>
+                <table class="data-list" id="inquiryList">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>이름</th>
+                            <th>이메일</th>
+                            <th>제목</th>
+                            <th>날짜</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inquiryBody">
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: #999;">등록된 문의가 없습니다.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <button class="btn btn-secondary" onclick="logout()">로그아웃</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <p>© 2019-2025 Happy Empathy Social Cooperative. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const ADMIN_PASSWORD = 'admin123'; // 기본 비밀번호 (변경 권장)
+
+        // 공지사항 데이터를 LocalStorage에서 가져오기
+        function getNotices() {
+            const notices = localStorage.getItem('notices');
+            return notices ? JSON.parse(notices) : [];
+        }
+
+        // 공지사항 데이터를 LocalStorage에 저장하기
+        function saveNotices(notices) {
+            localStorage.setItem('notices', JSON.stringify(notices));
+        }
+
+        // 로그인
+        function login() {
+            const password = document.getElementById('password').value;
+            const loginMessage = document.getElementById('loginMessage');
+
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('adminSection').classList.remove('hidden');
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                displayNotices();
+            } else {
+                loginMessage.innerHTML = '<div class="error-message">비밀번호가 올바르지 않습니다.</div>';
+            }
+        }
+
+        // 로그아웃
+        function logout() {
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('adminSection').classList.add('hidden');
+            document.getElementById('password').value = '';
+            sessionStorage.removeItem('adminLoggedIn');
+        }
+
+        // 공지사항 추가
+        function addNotice() {
+            const title = document.getElementById('noticeTitle').value;
+            const content = document.getElementById('noticeContent').value;
+
+            if (!title || !content) {
+                alert('제목과 내용을 모두 입력해주세요.');
+                return;
+            }
+
+            const notices = getNotices();
+            const newNotice = {
+                id: Date.now(),
+                title: title,
+                content: content,
+                date: new Date().toLocaleDateString('ko-KR')
+            };
+
+            notices.unshift(newNotice);
+            saveNotices(notices);
+
+            document.getElementById('noticeTitle').value = '';
+            document.getElementById('noticeContent').value = '';
+
+            displayNotices();
+            alert('공지사항이 추가되었습니다.');
+        }
+
+        // 공지사항 표시
+        function displayNotices() {
+            const notices = getNotices();
+            const noticeBody = document.getElementById('noticeBody');
+            noticeBody.innerHTML = '';
+
+            if (notices.length === 0) {
+                noticeBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">등록된 공지사항이 없습니다.</td></tr>';
+                return;
+            }
+
+            notices.forEach((notice, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${notice.title}</td>
+                    <td>${notice.date}</td>
+                    <td>
+                        <button class="btn" style="padding: 6px 12px; font-size: 12px;" onclick="deleteNotice(${notice.id})">삭제</button>
+                    </td>
+                `;
+                noticeBody.appendChild(row);
+            });
+        }
+
+        // 공지사항 삭제
+        function deleteNotice(id) {
+            if (confirm('이 공지사항을 삭제하시겠습니까?')) {
+                let notices = getNotices();
+                notices = notices.filter(notice => notice.id !== id);
+                saveNotices(notices);
+                displayNotices();
+                alert('공지사항이 삭제되었습니다.');
+            }
+        }
+
+        // 페이지 로드 시 로그인 상태 확인
+        window.addEventListener('load', () => {
+            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+            if (isLoggedIn === 'true') {
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('adminSection').classList.remove('hidden');
+                displayNotices();
+            }
+        });
+    </script>
+</body>
+</html>
