@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>국세청·공익신고 연동 - 투명경영 - 행복공감사회적협동조합</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* 헤더 스타일 */
+        header {
+            background-color: #2c5f2d;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .site-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .site-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* 네비게이션 */
+        nav {
+            background-color: #245a24;
+        }
+        
+        nav ul {
+            max-width: 1200px;
+            margin: 0 auto;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+        
+        nav ul li {
+            position: relative;
+        }
+        
+        nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: #1a4620;
+        }
+        
+        /* 메인 콘텐츠 */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 페이지 헤더 */
+        .page-header {
+            background: linear-gradient(135deg, #2c5f2d 0%, #1a4620 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+        
+        /* 서브메뉴 */
+        .submenu {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border-left: 4px solid #2c5f2d;
+        }
+        
+        .submenu ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .submenu li a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: white;
+            color: #2c5f2d;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid #2c5f2d;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .submenu li a:hover,
+        .submenu li a.active {
+            background-color: #2c5f2d;
+            color: white;
+        }
+        
+        /* 섹션 */
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section h2 {
+            color: #2c5f2d;
+            border-bottom: 3px solid #2c5f2d;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .section h3 {
+            color: #245a24;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        /* 카드 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .transparency-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .transparency-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(44, 95, 45, 0.15);
+            border-color: #2c5f2d;
+        }
+        
+        .transparency-card h3 {
+            color: #2c5f2d;
+            font-size: 18px;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+        
+        .transparency-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .transparency-card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2c5f2d;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .transparency-card a:hover {
+            background-color: #1a4620;
+        }
+        
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        /* 안내 박스 */
+        .info-box {
+            background: #f0f8f1;
+            padding: 25px;
+            border-left: 4px solid #2c5f2d;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .info-box p {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-box a {
+            color: #2c5f2d;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .info-box a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 푸터 */
+        footer {
+            background-color: #2c5f2d;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-section {
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .footer-info {
+            font-size: 14px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+        
+        .footer-info a {
+            color: #90ee90;
+            text-decoration: none;
+        }
+        
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-divider {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin: 30px 0;
+        }
+        
+        .footer-links {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 13px;
+        }
+        
+        .footer-links a {
+            margin: 0 15px;
+            color: #90ee90;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 반응형 */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li a {
+                padding: 12px 20px;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="header-content">
+            <div class="site-title">행복공감사회적협동조합</div>
+            <div class="site-subtitle">환경·진로·도시농업 교육으로 더 나은 사회를 만듭니다</div>
+        </div>
+    </header>
+
+    <!-- 네비게이션 -->
+    <nav>
+        <ul>
+            <li><a href="index.html">🏠 홈</a></li>
+            <li><a href="index.html#about">① 조합소개</a></li>
+            <li><a href="index.html#business">② 주요사업</a></li>
+            <li><a href="index.html#programs">③ 교육·프로그램</a></li>
+            <li><a href="index.html#resources">⑤ 자료실</a></li>
+            <li><a href="transparency.html">📊 투명경영</a></li>
+        </ul>
+    </nav>
+
+    <!-- 페이지 헤더 -->
+    <div class="page-header">
+        <h1>국세청·공익신고 연동</h1>
+        <p>행복공감사회적협동조합의 공익감독 연동 시스템을 안내합니다</p>
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <main>
+        <!-- 서브메뉴 -->
+        <div class="submenu">
+            <ul>
+                <li><a href="transparency-disclosure.html">경영공시</a></li>
+                <li><a href="transparency-finance.html">재무정보</a></li>
+                <li><a href="transparency-donation.html">기부금 모금액 및 활용실적</a></li>
+                <li><a href="transparency-national-tax.html" class="active">국세청·공익신고 연동</a></li>
+                <li><a href="transparency-rules.html">규정·정관·내부규칙</a></li>
+            </ul>
+        </div>
+
+        <!-- 안내 -->
+        <div class="info-box">
+            <p><strong>📌 공익감독 안내:</strong></p>
+            <p>
+                행복공감사회적협동조합은 공익성과 투명성을 최우선으로 생각합니다.
+                조합의 경영과정에서 공익위반사항이 있으시면 아래의 공익감독기관을 통해 신고하실 수 있습니다.
+            </p>
+        </div>
+
+        <!-- 국세청 연동 카드 -->
+        <section class="section">
+            <h2>공익감독 기관 연동</h2>
+            
+            <div class="card-grid">
+                <div class="transparency-card">
+                    <div class="card-icon">📊</div>
+                    <h3>국세청 홈택스<br>(공익법인 결산 공시)</h3>
+                    <p>
+                        행복공감사회적협동조합은 공익법인으로서 매년 결산서류를 공개합니다.
+                        조합의 재정 흐름과 사업 사용 내역은 국세청 홈택스 '공익법인 결산서류 등 공시'에서 누구나 열람하실 수 있습니다.
+                    </p>
+                    <a href="https://www.hometax.go.kr" target="_blank">바로가기 →</a>
+                </div>
+
+                <div class="transparency-card">
+                    <div class="card-icon">💝</div>
+                    <h3>국세청 홈택스<br>(기부금 모금액 및 활용실적)</h3>
+                    <p>
+                        본 조합의 기부금 모금액 및 활용실적은
+                        국세청 홈택스에서 확인할 수 있습니다.
+                        투명한 기부금 운영을 위해 모든 내역을 공시합니다.
+                    </p>
+                    <a href="https://www.hometax.go.kr" target="_blank">바로가기 →</a>
+                </div>
+
+                <div class="transparency-card">
+                    <div class="card-icon">🔗</div>
+                    <h3>국민권익위원회<br>(공익신고센터)</h3>
+                    <p>
+                        사회적협동조합 운영과정의 공익위반행위는
+                        국민권익위원회 공익신고센터를 통해 신고하실 수 있습니다.
+                        국민권익위는 신고자 보호 및 공익감시를 전담합니다.
+                    </p>
+                    <a href="https://www.clean.go.kr" target="_blank">바로가기 →</a>
+                </div>
+
+                <div class="transparency-card">
+                    <div class="card-icon">📜</div>
+                    <h3>국세청 홈택스<br>(전자기부금영수증)</h3>
+                    <p>
+                        행복공감사회적협동조합은 국세청 전자기부금영수증 제도를 통해
+                        기부영수증을 발급해 드립니다.
+                        연말정산 간소화 서비스에서 자동으로 조회하실 수 있습니다.
+                    </p>
+                    <a href="https://www.hometax.go.kr" target="_blank">바로가기 →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 상세 안내 -->
+        <section class="section">
+            <h2>연동 시스템 상세 안내</h2>
+            
+            <h3>① 국세청 홈택스 – 공익법인 결산서류 등 공시</h3>
+            <div class="info-box">
+                <p>
+                    <strong>홈택스 공익법인 공시 화면에는 다음의 정보를 확인할 수 있습니다:</strong>
+                </p>
+                <ul style="margin-left: 20px; line-height: 1.9;">
+                    <li>공익법인별 결산서류</li>
+                    <li>재무상태표 (자산, 부채, 자본)</li>
+                    <li>운영성과표 (수익, 비용, 잔액)</li>
+                    <li>사업 내역 및 성과</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    <strong>행복공감사회적협동조합의 결산서류 공시는
+                    국세청 홈택스 '공익법인 결산서류 등 공시'에서 확인하실 수 있습니다.</strong>
+                </p>
+                <p style="margin-top: 10px;">
+                    <a href="https://www.hometax.go.kr" target="_blank">🔗 국세청 홈택스 공익법인 공시 바로가기</a>
+                </p>
+            </div>
+
+            <h3>② 국세청 홈택스 – 기부금 모금액 및 활용실적</h3>
+            <div class="info-box">
+                <p>
+                    <strong>본 조합의 기부금 모금액 및 활용실적은
+                    국세청 홈택스에서 확인할 수 있습니다.</strong>
+                </p>
+                <p style="margin-top: 10px;">
+                    모든 기부금 내역을 투명하게 공시하여,
+                    기부자분들이 자신의 기부금이 어떻게 사용되는지
+                    명확히 알 수 있도록 합니다.
+                </p>
+                <p style="margin-top: 10px;">
+                    <a href="https://www.hometax.go.kr" target="_blank">🔗 국세청 홈택스 기부금 공시 바로가기</a>
+                </p>
+            </div>
+
+            <h3>③ 국민권익위원회 – 공익신고센터</h3>
+            <div class="info-box">
+                <p>
+                    <strong>사회적협동조합 운영과정의 공익위반행위는
+                    국민권익위원회 공익신고센터를 통해 신고하실 수 있습니다.</strong>
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>공익신고 사항 예시:</strong>
+                </p>
+                <ul style="margin-left: 20px; line-height: 1.9;">
+                    <li>정관 위반</li>
+                    <li>사업비 부정 사용</li>
+                    <li>부실 회계</li>
+                    <li>조합원 권리 침해</li>
+                    <li>기타 공익 위반 행위</li>
+                </ul>
+                <p style="margin-top: 15px;">
+                    국민권익위는 신고자 보호 및 공익감시를 전담하며,
+                    신고 내용은 비공개로 처리됩니다.
+                </p>
+                <p style="margin-top: 10px;">
+                    <a href="https://www.clean.go.kr" target="_blank">🔗 국민권익위원회 공익신고센터 바로가기</a>
+                </p>
+            </div>
+
+            <h3>④ 국세청 홈택스 – 전자기부금영수증 제도</h3>
+            <div class="info-box">
+                <p>
+                    <strong>행복공감사회적협동조합은 국세청 전자기부금영수증 제도를 통해
+                    기부영수증을 발급해 드립니다.</strong>
+                </p>
+                <p style="margin-top: 10px;">
+                    기부금단체를 통해 발급된 전자기부금영수증은
+                    연말정산간소화 서비스에 자동으로 반영되어,
+                    별도의 제출 없이 연말정산 시 소득공제를 받을 수 있습니다.
+                </p>
+                <p style="margin-top: 10px;">
+                    <a href="https://www.hometax.go.kr" target="_blank">🔗 국세청 홈택스 전자기부금영수증 안내 바로가기</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- 공익 투명성 원칙 -->
+        <section class="section">
+            <h2>공익 투명성 원칙</h2>
+            <div class="info-box">
+                <p style="font-size: 16px; line-height: 2;">
+                    행복공감사회적협동조합은 공익성과 투명성을 가장 먼저 생각합니다.<br><br>
+                    
+                    정관에 따라 전체 사업비의 <strong style="color: #2c5f2d;">40% 이상</strong>을 
+                    환경·진로·도시농업 교육에 사용하며,
+                    모든 재무정보와 사업실적을 투명하게 공개합니다.<br><br>
+                    
+                    조합의 경영과정에서 공익위반사항이 있으시면
+                    <strong style="color: #2c5f2d;">국세청, 국민권익위원회</strong> 등 
+                    공익감독기관을 통해 신고하실 수 있습니다.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>📋 단체 기본 정보</h4>
+                <div class="footer-info">
+                    <p><strong>단체명:</strong> 행복공감사회적협동조합</p>
+                    <p><strong>주소:</strong> 경기도 광주시 초월읍 대쌍령길 44 202호</p>
+                    <p><strong>전화:</strong> 031-762-9789 | <strong>이메일:</strong> <a href="mailto:anchow@naver.com">anchow@naver.com</a></p>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-links">
+                <a href="index.html">홈</a>
+                <a href="transparency.html">투명경영</a>
+                <a href="#">개인정보처리방침</a>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px; opacity: 0.8; font-size: 12px;">
+                <p>© 2025 행복공감사회적협동조합. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
