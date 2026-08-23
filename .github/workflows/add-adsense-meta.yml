@@ -1,0 +1,43 @@
+name: Add AdSense verification meta
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  patch-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Insert AdSense meta tag
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path("index.html")
+          text = path.read_text(encoding="utf-8")
+          tag = '<meta name="google-adsense-account" content="ca-pub-8269849634146153">'
+
+          if tag not in text:
+              marker = '<meta charset="UTF-8">'
+              if marker not in text:
+                  raise SystemExit("Could not find UTF-8 meta marker in index.html")
+              text = text.replace(marker, marker + "\n    " + tag, 1)
+              path.write_text(text, encoding="utf-8")
+
+      - name: Commit change if needed
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "AdSense meta tag already present; no commit needed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add Google AdSense verification meta tag"
+          git push
